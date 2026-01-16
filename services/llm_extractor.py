@@ -1,6 +1,12 @@
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from dotenv import load_dotenv
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+load_dotenv()
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash",
+    temperature=0
+)
 
 def extract_event(text: str):
     prompt = f"""
