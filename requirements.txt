@@ -7,3 +7,5 @@ langchain
 langchain-openai
 firebase-admin
 python-dotenv
+langchain-google-genai
+google-adk
