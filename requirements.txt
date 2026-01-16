@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+requests
+beautifulsoup4
+duckduckgo-search
+langchain
+langchain-openai
+firebase-admin
+python-dotenv
