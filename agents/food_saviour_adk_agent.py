@@ -1,6 +1,6 @@
 from google.adk.agents import ParallelAgent, LlmAgent
 
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-2.0-flash"
 
 
 # 🗓 Event Discovery Agent

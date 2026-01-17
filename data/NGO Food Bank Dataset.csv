@@ -1,0 +1,21 @@
+NGO_ID,NGO_Name,Latitude,Longitude,Address,Contact_Number,Food_Capacity (meals),Operating_Hours,Food_Type_Accepted
+NGO_013,Akshaya Patra Unit,18.975,72.8258,"Tardeo Road, Mumbai Central",-177663,5000,04:00 - 14:00,Veg
+NGO_004,The Robin Hood Army,19.0596,72.8295,"Bandra Reclamation, Bandra West",-147932,2000,24 Hours,Both
+NGO_002,Mumbai Roti Bank,19.0178,72.8478,"12 Dadar Market, Dadar West",-142665,1200,10:00 - 18:00,Veg
+NGO_008,Zomato Feeding India,19.1075,72.8263,"Juhu Tara Road, Juhu",-141884,1000,10:00 - 22:00,Veg
+NGO_020,Global FoodBanking,19.01,73.1,"Panvel, Navi Mumbai",-110909,900,08:00 - 18:00,Both
+NGO_007,Khaana Chahiye,18.922,72.8347,"Colaba Causeway, South Mumbai",-188796,800,08:00 - 18:00,Both
+NGO_017,Project Mumbai,19.04,72.85,"Sion Circle, Sion",-98732,750,10:00 - 20:00,Both
+NGO_010,Meals of Love,19.033,73.0297,"Sector 17, Vashi, Navi Mumbai",-101020,600,09:00 - 18:00,Veg
+NGO_001,Annapoorna Seva,19.076,72.8777,"Unit 4, Ind. Estate, Kurla West",-109332,500,08:00 - 20:00,Both
+NGO_006,Hunger Heroes,19.2183,72.9781,"Ghodbunder Rd, Thane West",-97550,450,09:00 - 21:00,Both
+NGO_015,Green City Relief,19.175,72.84,"Malad West, Link Road",-160144,400,09:00 - 17:00,Veg
+NGO_011,Daily Bread Corp,19.1726,72.9425,"LBS Marg, Mulund West",-111019,350,12:00 - 20:00,Both
+NGO_003,Hope Foundation,19.1136,72.8697,"Plot 56, Andheri East, Mumbai",-177461,300,09:00 - 17:00,Both
+NGO_018,Life Source,19.23,72.86,"Borivali West, SV Road",-100911,300,09:00 - 19:00,Veg
+NGO_009,Shelter Don Bosco,19.0269,72.8553,"Matunga East, Near Station",-111243,250,07:00 - 19:00,Both
+NGO_016,Urban Food Rescue,19.08,72.88,"Vidya Vihar West, Campus Rd",-107932,200,08:00 - 16:00,Both
+NGO_005,Seva Kitchen,19.1197,72.9051,"Powai Plaza, Hiranandani, Powai",-154229,150,11:00 - 15:00,Veg
+NGO_012,Helping Hands,19.2094,72.8648,"Kandivali East, Lokhandwala",-111019,150,10:00 - 16:00,Veg
+NGO_019,Humanity First,19.15,72.92,"Bhandup West, Village Rd",-119672,100,11:00 - 15:00,Both
+NGO_014,Community Fridge,19.06,72.89,"Chembur Naka, Chembur",-137923,50,24 Hours,Both

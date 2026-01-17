@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routes.dataset import router as dataset_router
+from db.csv_db import get_events
 # standard imports
 from agents.event_agent import discover_events
 from db.firebase import get_db
@@ -14,7 +16,7 @@ from google.genai import types
 from agents.food_saviour_adk_agent import root_agent
 
 app = FastAPI(title="Food Saviour – Agentic AI")
-
+app.include_router(dataset_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,15 +38,29 @@ def firebase_test():
 
 @app.post("/run-event-agent")
 def run_event_agent(city: str):
-    events = discover_events(city)
+    df = get_events()
 
-    db_ref = get_db().child("events")
-    for e in events:
-        db_ref.push(e)
+    # Normalize city column and input
+    df["City"] = df["City"].astype(str).str.strip().str.lower()
+    input_city = city.strip().lower()
+
+    # Filter events by city
+    matched_events = df[df["City"].str.contains(input_city, na=False)]
+
+
+    if matched_events.empty:
+     return {
+        "status": "no events found",
+        "city": city,
+        "count": 0,
+        "events": []
+    }
 
     return {
-        "message": "Event Discovery Agent executed",
-        "events_found": len(events)
+        "status": "events found",
+        "city": city,
+        "count": len(matched_events),
+        "events": matched_events.to_dict(orient="records")
     }
 
 @app.post("/run-langchain-agent")
