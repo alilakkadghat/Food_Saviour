@@ -9,3 +9,4 @@ firebase-admin
 python-dotenv
 langchain-google-genai
 google-adk
+lucide-react
