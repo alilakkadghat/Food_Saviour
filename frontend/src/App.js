@@ -13,62 +13,57 @@ export default function FoodSaviourApp() {
   const [isSearching, setIsSearching] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const searchEvents = async () => {
-    if (!location) {
-      alert('Please enter a location');
-      return;
-    }
+ const searchEvents = async () => {
+  if (!location) {
+    alert("Please enter a location");
+    return;
+  }
 
-    setIsSearching(true);
-    addLog('info', `Starting search for events in ${location}...`);
+  setIsSearching(true);
+  addLog("info", `Calling backend AI for ${location}...`);
 
-    try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{
-            role: 'user',
-            content: `Search for recent or upcoming events (weddings, conferences, parties, corporate events) in ${location} that might have food surplus. Return ONLY a JSON array with this exact format, no other text:
-[{"name": "event name", "location": "specific location", "date": "date", "type": "event type", "estimatedFood": "estimated amount", "contact": "contact if available or N/A"}]
-Provide 3-5 realistic events.`
-          }]
-        })
-      });
+  try {
+    const response = await fetch(
+      `http://localhost:8000/run-event-agent?city=${encodeURIComponent(location)}`,
+      { method: "POST" }
+    );
 
-      const data = await response.json();
-      const textContent = data.content.find(c => c.type === 'text')?.text || '[]';
-      const cleanJson = textContent.replace(/```json\n?|\n?```/g, '').trim();
-      const foundEvents = JSON.parse(cleanJson);
-      
-      setEvents(foundEvents);
-      addLog('success', `Found ${foundEvents.length} potential events with food surplus`);
-    } catch (error) {
-      addLog('error', 'Failed to search events. Please try again.');
-      console.error(error);
-    } finally {
-      setIsSearching(false);
-    }
-  };
+    const data = await response.json();
+
+    addLog(
+      "success",
+      `Backend AI ran successfully. Events found: ${data.events_found}`
+    );
+
+    const analysisResponse = await fetch(
+      `http://localhost:8000/run-langchain-agent?city=${encodeURIComponent(location)}`,
+      { method: "POST" }
+    );
+
+    const analysisData = await analysisResponse.json();
+    console.log("Langchain output:", analysisData);
+
+    addLog("info", "Langchain reasoning agent completed");
+
+  } catch (err) {
+    console.error(err);
+    addLog("error", "Backend connection failed");
+  } finally {
+    setIsSearching(false);
+  }
+};
 
   const processEvent = async (event) => {
     setIsProcessing(true);
     addLog('info', `Analyzing event: ${event.name}...`);
 
     try {
-      // Simulate AI analysis
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Contact NGOs based on priority
+
       for (const ngo of ngos.sort((a, b) => a.priority - b.priority)) {
         addLog('success', `Contacting ${ngo.name} (Priority ${ngo.priority}) at ${ngo.contact}`);
         await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Simulate response
+
         const responded = Math.random() > 0.3;
         if (responded) {
           addLog('success', `✓ ${ngo.name} confirmed pickup for ${event.name}`);
